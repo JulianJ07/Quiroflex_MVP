@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quiroflex Agenda MVP</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">Q</div>
+        <div>
+          <p class="eyebrow">MVP funcional</p>
+          <h1>Quiroflex Agenda</h1>
+        </div>
+      </div>
+      <nav class="tabs" aria-label="Vistas principales">
+        <button class="tab-button active" type="button" data-view="booking">
+          <i data-lucide="calendar-plus"></i>
+          <span>Agendar</span>
+        </button>
+        <button class="tab-button" type="button" data-view="admin">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Panel</span>
+        </button>
+        <button class="tab-button" type="button" data-view="backlog">
+          <i data-lucide="list-checks"></i>
+          <span>Backlog</span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="view active" id="booking" aria-labelledby="booking-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Paciente</p>
+            <h2 id="booking-title">Agendamiento online</h2>
+          </div>
+          <button class="ghost-button" type="button" id="load-demo">
+            <i data-lucide="database"></i>
+            Cargar demo
+          </button>
+        </div>
+
+        <div class="booking-layout">
+          <form class="panel form-panel" id="booking-form">
+            <div class="form-grid">
+              <label>
+                Nombre del paciente
+                <input required name="patientName" placeholder="Ej. Laura Gómez" autocomplete="name" />
+              </label>
+              <label>
+                Celular
+                <input required name="phone" placeholder="3001234567" inputmode="tel" autocomplete="tel" />
+              </label>
+              <label>
+                Correo
+                <input required name="email" type="email" placeholder="paciente@correo.com" autocomplete="email" />
+              </label>
+              <label>
+                Canal de origen
+                <select name="channel">
+                  <option value="Instagram">Instagram</option>
+                  <option value="WhatsApp">WhatsApp</option>
+                  <option value="Facebook">Facebook</option>
+                  <option value="Referido">Referido</option>
+                </select>
+              </label>
+              <label>
+                Servicio
+                <select required name="service" id="service-select"></select>
+              </label>
+              <label>
+                Fecha
+                <input required name="date" id="appointment-date" type="date" />
+              </label>
+            </div>
+
+            <div class="slot-block">
+              <div class="slot-title">
+                <span>Horarios disponibles</span>
+                <strong id="slot-date-label"></strong>
+              </div>
+              <div class="slot-grid" id="slot-grid" role="radiogroup" aria-label="Horarios disponibles"></div>
+              <input type="hidden" name="time" id="selected-time" required />
+            </div>
+
+            <div class="actions-row">
+              <button class="primary-button" type="submit">
+                <i data-lucide="check-circle-2"></i>
+                Confirmar cita
+              </button>
+              <button class="ghost-button" type="reset">
+                <i data-lucide="rotate-ccw"></i>
+                Limpiar
+              </button>
+            </div>
+          </form>
+
+          <aside class="panel summary-panel" aria-labelledby="summary-title">
+            <h3 id="summary-title">Confirmación</h3>
+            <div id="confirmation-empty" class="empty-state">
+              La confirmación aparecerá cuando se registre una cita.
+            </div>
+            <div id="confirmation-card" class="confirmation-card hidden">
+              <div class="success-icon"><i data-lucide="badge-check"></i></div>
+              <h4>Cita registrada</h4>
+              <p id="confirmation-text"></p>
+              <a class="whatsapp-link" id="whatsapp-link" href="#" target="_blank" rel="noopener noreferrer">
+                <i data-lucide="message-circle"></i>
+                Enviar por WhatsApp
+              </a>
+              <button class="ghost-button full" type="button" id="copy-confirmation">
+                <i data-lucide="copy"></i>
+                Copiar mensaje
+              </button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="admin" aria-labelledby="admin-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Administración</p>
+            <h2 id="admin-title">Agenda y control operativo</h2>
+          </div>
+          <div class="actions-row compact">
+            <button class="ghost-button" type="button" id="export-csv">
+              <i data-lucide="download"></i>
+              CSV
+            </button>
+            <button class="danger-button" type="button" id="reset-data">
+              <i data-lucide="trash-2"></i>
+              Reiniciar
+            </button>
+          </div>
+        </div>
+
+        <div class="kpi-grid" aria-label="Indicadores del día">
+          <article class="kpi-card">
+            <span>Citas programadas</span>
+            <strong id="kpi-total">0</strong>
+          </article>
+          <article class="kpi-card">
+            <span>Ingresos proyectados</span>
+            <strong id="kpi-revenue">$0</strong>
+          </article>
+          <article class="kpi-card">
+            <span>Recordatorios listos</span>
+            <strong id="kpi-reminders">0</strong>
+          </article>
+          <article class="kpi-card">
+            <span>Cruces de horario</span>
+            <strong id="kpi-conflicts">0</strong>
+          </article>
+        </div>
+
+        <div class="admin-layout">
+          <section class="panel table-panel" aria-labelledby="table-title">
+            <div class="panel-header">
+              <h3 id="table-title">Citas registradas</h3>
+              <label class="date-filter">
+                Filtrar fecha
+                <input id="admin-date-filter" type="date" />
+              </label>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Hora</th>
+                    <th>Paciente</th>
+                    <th>Servicio</th>
+                    <th>Canal</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="appointments-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <aside class="panel reminder-panel" aria-labelledby="reminder-title">
+            <h3 id="reminder-title">Mensaje de recordatorio</h3>
+            <textarea id="reminder-message" readonly rows="8">Selecciona una cita para generar el mensaje.</textarea>
+            <p class="helper-text">El MVP simula el mensaje listo para WhatsApp y permite copiarlo en la sustentación.</p>
+            <button class="primary-button full" type="button" id="copy-reminder">
+              <i data-lucide="copy"></i>
+              Copiar mensaje
+            </button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="backlog" aria-labelledby="backlog-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Producto</p>
+            <h2 id="backlog-title">Backlog refinado</h2>
+          </div>
+          <div class="legend" aria-label="Convenciones">
+            <span><b class="dot done"></b> Implementada</span>
+            <span><b class="dot progress"></b> Próxima</span>
+            <span><b class="dot future"></b> Futura</span>
+          </div>
+        </div>
+        <div class="backlog-board" id="backlog-board"></div>
+      </section>
+    </main>
+  </body>
+</html>
