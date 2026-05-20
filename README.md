@@ -2,6 +2,10 @@
 
 MVP funcional para la entrega final de Sistemas de Informacion. La aplicacion implementa un flujo basico de agendamiento online para Quiroflex, con panel administrativo, confirmacion de citas, recordatorio asistido por WhatsApp, metricas operativas y backlog visual.
 
+## URL del backlog
+
+El backlog completo se encuentra en [`BACKLOG.md`](BACKLOG.md).
+
 ## Backlog de producto
 
 | ID | Historia de usuario | Criterios de aceptacion | Prioridad | Estado | Relacion con el problema |
