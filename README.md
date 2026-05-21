@@ -1,10 +1,10 @@
 # Quiroflex Agenda MVP
 
-MVP funcional para la entrega final de Sistemas de Informacion. La aplicacion implementa un flujo basico de agendamiento online para Quiroflex, con panel administrativo, confirmacion de citas, recordatorio asistido por WhatsApp, metricas operativas y backlog visual.
+Repositorio de apoyo para la entrega final de Sistemas de Informacion. El MVP funcional de Quiroflex se implementara sobre SimplyBook.me Standard; este repositorio conserva el backlog refinado, el analisis de historias y la demo web construida como prototipo de referencia.
 
 ## URL del backlog
 
-El backlog completo se encuentra en [`BACKLOG.md`](BACKLOG.md).
+El backlog completo actualizado para el MVP en SimplyBook.me se encuentra en [`BACKLOG.md`](BACKLOG.md).
 
 ## Backlog de producto
 
