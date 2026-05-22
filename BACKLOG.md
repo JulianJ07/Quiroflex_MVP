@@ -35,8 +35,6 @@ Con el estado actual, el MVP cumple **4 historias de usuario principales** para 
 
 ## Historias implementadas para sustentar
 
-Para la exposicion final se recomienda sustentar estas historias:
-
 | Historia | Que mostrar en vivo | Evidencia sugerida |
 | --- | --- | --- |
 | HU-01 Servicios y horarios | Abrir el portal y mostrar servicios de 1 hora y horarios disponibles. | Captura del listado de servicios y calendario. |
@@ -44,9 +42,3 @@ Para la exposicion final se recomienda sustentar estas historias:
 | HU-03 Datos y confirmacion | Mostrar formulario con nombre, email, telefono y resumen de la cita. | Captura del formulario de confirmacion. |
 | HU-04 Panel administrativo | Entrar a SimplyBook como administrador y mostrar la cita creada en la agenda. | Captura del calendario/panel de reservas. |
 
-## Ajustes recomendados antes de entregar
-
-- Activar o evidenciar las notificaciones de confirmacion por correo. Si van a mencionar WhatsApp/SMS, deben mostrar una prueba real o aclarar que queda como configuracion posterior con creditos.
-- Agregar un campo personalizado "Como nos conociste?" con opciones: Instagram, WhatsApp, Facebook, referido y otro. Con esto HU-06 pasaria de pendiente a implementada.
-- Guardar capturas del panel administrador para demostrar HU-04 y HU-05, porque esas historias no se pueden verificar solo desde la pagina publica.
-- Mantener HU-08 como fase futura para no mezclar el MVP de agenda con historia clinica, que tiene mayor complejidad legal y tecnica.
